@@ -5,44 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FPRS - Financial Product Rating System</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{font-family:'Inter',sans-serif}
-body{background:#ffffff;color:#0f172a;font-weight:300}
-.card{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.header-border{border-bottom:1px solid #f1f5f9}
-th{color:#64748b;font-size:11px;font-weight:400;letter-spacing:0.08em}
-td{border-top:1px solid #f1f5f9;font-weight:300;font-size:13px}
-.star-on{color:#d97706}.star-off{color:#e2e8f0}
-.status-green{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0}
-.status-orange{background:#fff7ed;color:#ea580c;border:1px solid #fed7aa}
-.status-red{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+*{font-family:'Heebo',sans-serif}
+body{background:#f8f7ff;color:#1e1b4b}
+.header-grad{background:linear-gradient(135deg,#4c1d95 0%,#6d28d9 25%,#2563eb 60%,#0e7490 100%)}
+.card{background:#ffffff;border:1px solid #e9e5ff;border-radius:18px;box-shadow:0 4px 20px rgba(76,29,149,0.06)}
+th{color:#6b7280;font-size:11px;font-weight:600;letter-spacing:0.05em}
+td{border-top:1px solid #f3f0ff;font-weight:400;font-size:13px}
+.star-on{color:#f59e0b}.star-off{color:#e9e5ff}
+.status-green{background:linear-gradient(135deg,#ecfdf5,#d1fae5);color:#065f46;border:1px solid #6ee7b7;font-weight:600}
+.status-orange{background:linear-gradient(135deg,#fff7ed,#ffedd5);color:#9a3412;border:1px solid #fdba74;font-weight:600}
+.status-red{background:linear-gradient(135deg,#fef2f2,#fee2e2);color:#991b1b;border:1px solid #fca5a5;font-weight:600}
+.search{border:2px solid #e9e5ff;background:#ffffff}
+.search:focus{border-color:#8b5cf6;outline:none}
 </style>
 </head>
-<body class="p-0">
-<div class="header-border bg-white sticky top-0 z-20">
-<div class="max-w- mx-auto px-6 py-4 flex justify-between items-center">
+<body>
+<div class="header-grad text-white">
+<div class="max-w- mx-auto px-8 py-5 flex justify-between items-center">
 <div class="flex items-center gap-4">
-<img src="./logo.jpg" onerror="this.style.display='none'" class="w-10 h-10 rounded-lg object-contain border border-slate-100">
-<div><h1 class="text- font-[300] tracking-[0.2em] text-slate-900">FPRS</h1><p class="text- tracking-[0.25em] text-slate-400">FINANCIAL PRODUCT RATING SYSTEM</p></div>
+<img src="./logo.jpg" onerror="this.style.display='none'" class="w-12 h-12 rounded-xl object-contain bg-white p-1 shadow-lg">
+<div><h1 class="text- font-bold tracking-wide">FPRS</h1><p class="text- tracking-[0.2em] text-violet-200 font-medium">FINANCIAL PRODUCT RATING SYSTEM</p></div>
 </div>
-<div class="flex gap-2 text-">
-<span class="px-3 py-1.5 rounded-full status-red">1-2★ שחיקה בקרן</span>
-<span class="px-3 py-1.5 rounded-full status-orange">3★ יציב</span>
-<span class="px-3 py-1.5 rounded-full status-green">4-5★ מומנטום חיובי</span>
+<div class="text-right">
+<div class="text- font-medium text-violet-100">מערכת דירוג קרנות מתקדמת</div>
+<div class="text- text-violet-200/80">4 מנועי AI • מתעדכן יומית</div>
 </div>
 </div>
 </div>
 
 <div class="max-w- mx-auto p-6">
-<div class="card p-4 mb-5 flex gap-3 bg-slate-50/50">
-<input id="searchInput" placeholder="חיפוש לפי שם או מס' קרן..." class="flex-1 bg-white border border-slate-200 rounded-xl px-5 py-2.5 text- outline-none">
-<select id="categoryFilter" class="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-"><option value="">כל הקטגוריות</option></select>
-<span id="count" class="text- text-slate-500 self-center px-3"></span>
+<div class="card p-4 mb-6 flex gap-3">
+<input id="searchInput" placeholder="חיפוש קרן או מס' קרן..." class="search flex-1 rounded-xl px-5 py-3 text-">
+<select id="categoryFilter" class="search rounded-xl px-5 py-3 text- font-medium"><option value="">כל הקטגוריות</option></select>
+<span id="count" class="text- text-violet-700 font-semibold self-center px-4 bg-violet-50 rounded-full py-2"></span>
 </div>
 
-<div class="card overflow-hidden"><div class="overflow-auto max-h-"><table class="w-full"><thead class="sticky top-0 bg-slate-50 z-10"><tr class="text-right border-b border-slate-100">
-<th class="p-3.5">#</th><th class="p-3.5">מס' קרן</th><th class="p-3.5">שם קרן</th><th class="p-3.5">קטגוריה</th><th class="p-3.5">ציון מודל</th><th class="p-3.5">דירוג כוכבים</th><th class="p-3.5">תשואה 1M</th><th class="p-3.5">תשואה 12M</th><th class="p-3.5">תשואה 36M</th><th class="p-3.5">Sharpe שנתי</th><th class="p-3.5">הערה</th>
+<div class="card overflow-hidden"><div class="overflow-auto max-h-"><table class="w-full"><thead class="sticky top-0 bg-gradient-to-r from-violet-50 to-blue-50 z-10 border-b-2 border-violet-100"><tr class="text-right">
+<th class="p-4">#</th><th class="p-4">מס' קרן</th><th class="p-4">שם קרן</th><th class="p-4">קטגוריה</th><th class="p-4">ציון מודל</th><th class="p-4">דירוג כוכבים</th><th class="p-4">1M</th><th class="p-4">12M</th><th class="p-4">36M</th><th class="p-4">Sharpe</th><th class="p-4">הערה</th>
 </tr></thead><tbody id="fundsBody"></tbody></table></div></div>
 </div>
 
@@ -58,72 +59,25 @@ async function load(){
  cats.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);});
  render(d);
 }
-function cleanNumber(v){
- if(v==null) return null;
- if(typeof v==='string' && v.toLowerCase()==='nan') return null;
- let n=Number(v);
- return isNaN(n)?null:n;
-}
-function getStars(f){
- let raw=f.stars;
- let n=cleanNumber(raw);
- if(n!=null) return Math.max(1,Math.min(5,Math.round(n)));
- let s=cleanNumber(f.score)||0;
- if(s>=85) return 5;
- if(s>=70) return 4;
- if(s>=50) return 3;
- if(s>=30) return 2;
- return 1;
-}
-function getField(f, names){
- for(let k of names){ if(f[k]!=null && String(f[k]).toLowerCase()!=='nan' && f[k]!=='') return f[k]; }
- return null;
-}
-function fmtPct(v){
- let n=cleanNumber(v);
- if(n==null) return '—';
- return (n>0?'+':'')+n.toFixed(2)+'%';
-}
-function fmtSharpe(v){
- let n=cleanNumber(v);
- if(n==null) return '—';
- return n.toFixed(2);
-}
+function cleanNumber(v){ if(v==null) return null; if(typeof v==='string' && v.toLowerCase()==='nan') return null; let n=Number(v); return isNaN(n)?null:n; }
+function getStars(f){ let n=cleanNumber(f.stars); if(n!=null) return Math.max(1,Math.min(5,Math.round(n))); let s=cleanNumber(f.score)||0; if(s>=85) return 5; if(s>=70) return 4; if(s>=50) return 3; if(s>=30) return 2; return 1; }
+function getField(f,names){ for(let k of names){ if(f[k]!=null && String(f[k]).toLowerCase()!=='nan' && f[k]!=='') return f[k]; } return null; }
+function fmtPct(v){ let n=cleanNumber(v); if(n==null) return '—'; return (n>0?'+':'')+n.toFixed(2)+'%'; }
+function fmtSharpe(v){ let n=cleanNumber(v); if(n==null) return '—'; return n.toFixed(2); }
 function render(list){
  let b=document.getElementById('fundsBody'); b.innerHTML='';
  list.slice(0,800).forEach(f=>{
   let stars=getStars(f);
-  let r1=getField(f,['return_1m','ret_1m','1m','return_1M','month_1','r1m']);
-  let r12=getField(f,['return_12m','return_1y','ret_12m','12m','return_12M','r12m','return_1Y']);
-  let r36=getField(f,['return_36m','return_3y','ret_36m','36m','return_36M','r36m']);
-  let sh=getField(f,['sharpe_1y','sharpe_annual','sharpe','sharpe_1Y','sharpe_12m']);
+  let r1=getField(f,['return_1m','ret_1m','1m']); let r12=getField(f,['return_12m','return_1y','ret_12m','12m']); let r36=getField(f,['return_36m','return_3y','ret_36m','36m']); let sh=getField(f,['sharpe_1y','sharpe_annual','sharpe']);
   let status = stars>=4? {cls:'status-green', label:'מומנטום חיובי'} : stars===3? {cls:'status-orange', label:'יציב'} : {cls:'status-red', label:'שחיקה בקרן'};
   let starsHtml=''; for(let i=1;i<=5;i++) starsHtml+=`<span class="${i<=stars?'star-on':'star-off'}">★</span>`;
-  let tr=document.createElement('tr');
-  tr.className='hover:bg-slate-50';
-  tr.innerHTML=`
-  <td class="p-3.5 text-slate-400">${f.rank||''}</td>
-  <td class="p-3.5 font-mono text-slate-700">${f.id||''}</td>
-  <td class="p-3.5 text-slate-900 max-w- truncate" title="${f.name||''}">${f.name||''}</td>
-  <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text- text-slate-600">${f.category||''}</span></td>
-  <td class="p-3.5 font-[400] text-slate-900">${cleanNumber(f.score)!=null?cleanNumber(f.score).toFixed(1):'—'}</td>
-  <td class="p-3.5">${starsHtml} <span class="text- text-slate-500 mr-1">${stars}★</span></td>
-  <td class="p-3.5 ${cleanNumber(r1)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r1)}</td>
-  <td class="p-3.5 font-[400] ${cleanNumber(r12)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r12)}</td>
-  <td class="p-3.5 ${cleanNumber(r36)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r36)}</td>
-  <td class="p-3.5 text-slate-700">${fmtSharpe(sh)}</td>
-  <td class="p-3.5"><span class="px-3 py-1.5 rounded-full text- ${status.cls}">${status.label}</span></td>`;
+  let tr=document.createElement('tr'); tr.className='hover:bg-violet-50/70 transition-colors';
+  tr.innerHTML=`<td class="p-4 text-slate-500 font-medium">${f.rank||''}</td><td class="p-4 font-mono font-bold text-violet-900">${f.id||''}</td><td class="p-4 text-slate-900 font-medium max-w- truncate">${f.name||''}</td><td class="p-4"><span class="px-3 py-1 rounded-full bg-violet-100 text-violet-800 text- font-semibold">${f.category||''}</span></td><td class="p-4 font-bold text-violet-900 text-">${cleanNumber(f.score)!=null?cleanNumber(f.score).toFixed(1):'—'}</td><td class="p-4">${starsHtml} <span class="text- text-slate-500 mr-1 font-bold">${stars}</span></td><td class="p-4 font-semibold ${cleanNumber(r1)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r1)}</td><td class="p-4 font-bold ${cleanNumber(r12)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r12)}</td><td class="p-4 font-semibold ${cleanNumber(r36)>=0?'text-emerald-600':'text-red-600'}">${fmtPct(r36)}</td><td class="p-4 font-medium text-slate-700">${fmtSharpe(sh)}</td><td class="p-4"><span class="px-3.5 py-1.5 rounded-full text- ${status.cls}">${status.label}</span></td>`;
   b.appendChild(tr);
  });
 }
-document.getElementById('searchInput').addEventListener('input',e=>{
- let q=e.target.value.toLowerCase();
- render(allFunds.filter(f=> (f.name&&f.name.toLowerCase().includes(q)) || String(f.id).includes(q)));
-});
-document.getElementById('categoryFilter').addEventListener('change',e=>{
- let v=e.target.value;
- render(v?allFunds.filter(f=>f.category===v):allFunds);
-});
+document.getElementById('searchInput').addEventListener('input',e=>{ let q=e.target.value.toLowerCase(); render(allFunds.filter(f=> (f.name&&f.name.toLowerCase().includes(q)) || String(f.id).includes(q))); });
+document.getElementById('categoryFilter').addEventListener('change',e=>{ let v=e.target.value; render(v?allFunds.filter(f=>f.category===v):allFunds); });
 load();
 </script>
 </body>
