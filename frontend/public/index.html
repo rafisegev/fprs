@@ -5,43 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FPRS - Financial Product Rating System</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Heebo:wght@100;200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
-*{font-family:'Inter','Heebo',sans-serif!important; font-weight:200!important; letter-spacing:0.02em}
-b,strong,.font-black,.font-bold{font-weight:300!important}
-body{background:#070d1e;color:#cbd5e1}
-.card{background:rgba(15,23,42,0.6);border:1px solid rgba(51,65,85,0.3);border-radius:16px;backdrop-filter:blur(10px)}
+*{font-family:'Inter',sans-serif!important}
+body{background:#070d1e;color:#cbd5e1;font-weight:200}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(51,65,85,0.25);border-radius:16px}
 .gold{background:linear-gradient(135deg,#fbbf24,#d97706)}
-.search{background:#0f172a;border:1px solid #1e293b;font-weight:200!important}
-th{color:#64748b;font-size:10px;font-weight:200!important;letter-spacing:0.12em}
-td{border-top:1px solid rgba(30,41,59,0.3);font-weight:200!important}
+.search{background:#0f172a;border:1px solid #1e293b;font-weight:200}
+th{color:#64748b;font-size:10px;font-weight:300!important;letter-spacing:0.1em;white-space:nowrap}
+td{border-top:1px solid rgba(30,41,59,0.25);font-weight:200;font-size:12.5px}
 .star-on{color:#fbbf24}.star-off{color:#1e293b}
-.decay-red{color:#f87171;border:1px solid rgba(248,113,113,0.2);background:rgba(248,113,113,0.06)}
-.decay-orange{color:#fb923c;border:1px solid rgba(251,146,60,0.2);background:rgba(251,146,60,0.06)}
-.decay-green{color:#34d399;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06)}
-.ubs-title{font-weight:100!important;letter-spacing:0.2em}
+.status-green{background:rgba(16,185,129,0.08);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25)}
+.status-orange{background:rgba(249,115,22,0.08);color:#fdba74;border:1px solid rgba(249,115,22,0.25)}
+.status-red{background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.25)}
 </style>
 </head>
 <body class="p-6">
 <div class="max-w- mx-auto">
-<div class="flex justify-between items-center mb-10">
-<div class="flex items-center gap-6">
-<div class="w-11 h-11 gold rounded-xl flex items-center justify-center text-black text- tracking-widest">FPRS</div>
-<div>
-<h1 class="text- ubs-title text-white">FPRS</h1>
-<p class="text- tracking-[0.3em] text-amber-200/60 uppercase">Financial Product Rating System</p>
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 gold rounded-xl flex items-center justify-center text-black font-light text- tracking-widest">FPRS</div>
+<div><h1 class="text- font-thin tracking-[0.2em] text-white">FPRS</h1><p class="text- tracking-[0.25em] text-amber-200/60">FINANCIAL PRODUCT RATING SYSTEM</p></div>
 </div>
-</div>
-<div id="totalFunds" class="text- text-slate-500 tracking-wide">-</div>
+<div class="flex gap-2 text-"><span class="px-3 py-1 rounded-full status-red">1-2★ שחיקה בקרן</span><span class="px-3 py-1 rounded-full status-orange">3★ יציב</span><span class="px-3 py-1 rounded-full status-green">4-5★ מומנטום חיובי</span></div>
 </div>
 
-<div class="card p-4 mb-6 flex gap-3">
-<input id="searchInput" placeholder="חיפוש..." class="search flex-1 rounded-xl px-5 py-2.5 text- outline-none">
+<div class="card p-4 mb-5 flex gap-3">
+<input id="searchInput" placeholder="חיפוש קרן או מספר קרן..." class="search flex-1 rounded-xl px-5 py-2.5 text- outline-none">
 <select id="categoryFilter" class="search rounded-xl px-4 py-2.5 text-"><option value="">כל הקטגוריות</option></select>
-<div class="flex gap-2 text- items-center ml-4"><span class="px-2.5 py-1 rounded-full decay-red">1-2★ שחיקה בקרן</span><span class="px-2.5 py-1 rounded-full decay-orange">3★ יציב</span><span class="px-2.5 py-1 rounded-full decay-green">4-5★ מומנטום חזק</span></div>
 </div>
 
-<div class="card overflow-hidden"><div class="overflow-auto max-h-"><table class="w-full text-[12.5px]"><thead class="sticky top-0 bg-[#0a1224] z-10"><tr class="text-right"><th class="p-4">#</th><th class="p-4">שם קרן</th><th class="p-4">קטגוריה</th><th class="p-4">ציון</th><th class="p-4">דירוג</th><th class="p-4">12M</th><th class="p-4">סטטוס מדויק</th></tr></thead><tbody id="fundsBody"></tbody></table></div></div>
+<div class="card overflow-hidden"><div class="overflow-auto max-h-"><table class="w-full"><thead class="sticky top-0 bg-[#0a1224] z-10"><tr class="text-right">
+<th class="p-3">#</th><th class="p-3">מס' קרן</th><th class="p-3">שם קרן</th><th class="p-3">קטגוריה</th><th class="p-3">ציון מודל</th><th class="p-3">דירוג כוכבים</th><th class="p-3">תשואה 1M</th><th class="p-3">תשואה 12M</th><th class="p-3">תשואה 36M</th><th class="p-3">Sharpe שנתי</th><th class="p-3">הערה</th>
+</tr></thead><tbody id="fundsBody"></tbody></table></div></div>
 </div>
 
 <script>
@@ -50,14 +46,13 @@ async function load(){
  let r=await fetch('./funds.json?v='+Date.now());
  let d=await r.json(); if(d.funds) d=d.funds;
  allFunds=d;
- document.getElementById('totalFunds').textContent = d.length + ' קרנות';
- let cats=[...new Set(d.map(f=>f.category))].sort();
+ let cats=[...new Set(d.map(f=>f.category).filter(Boolean))].sort();
  let sel=document.getElementById('categoryFilter');
  cats.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);});
  render(d);
 }
 function getStars(f){
- if(f.stars!=null && f.stars!=='') return Math.round(Number(f.stars));
+ if(f.stars!=null && f.stars!=='') return Math.max(1,Math.min(5,Math.round(Number(f.stars))));
  let s=Number(f.score)||0;
  if(s>=85) return 5;
  if(s>=70) return 4;
@@ -65,37 +60,50 @@ function getStars(f){
  if(s>=30) return 2;
  return 1;
 }
-function starsHtml(f){
- let n=getStars(f);
- let s=''; for(let i=1;i<=5;i++) s+=`<span class="${i<=n?'star-on':'star-off'}">★</span>`;
- return s;
+function starsHtml(n){
+ let h=''; for(let i=1;i<=5;i++) h+=`<span class="${i<=n?'star-on':'star-off'}">★</span>`;
+ return h;
 }
-// לוגיקה מדויקת לפי בקשה שלך
-function getStatus(f){
- let stars=getStars(f);
- if(stars>=4) return {cls:'decay-green', text:'מומנטום חזק'};
- if(stars===3) return {cls:'decay-orange', text:'יציב'};
- return {cls:'decay-red', text:'שחיקה בקרן'}; // 1-2 בלבד
+function fmt(v){
+ if(v==null || v==='' ) return '—';
+ let num=Number(v); if(isNaN(num)) return '—';
+ return (num>0?'+':'')+num.toFixed(2)+'%';
+}
+function fmtSharpe(v){
+ if(v==null || v==='') return '—';
+ let num=Number(v); if(isNaN(num)) return '—';
+ return num.toFixed(2);
+}
+function getStatus(stars){
+ if(stars>=4) return {cls:'status-green', label:'מומנטום חיובי'};
+ if(stars===3) return {cls:'status-orange', label:'יציב'};
+ return {cls:'status-red', label:'שחיקה בקרן'};
 }
 function render(list){
  let b=document.getElementById('fundsBody'); b.innerHTML='';
- list.slice(0,600).forEach(f=>{
-  let st=getStatus(f);
+ list.slice(0,800).forEach(f=>{
+  let stars=getStars(f);
+  let st=getStatus(stars);
   let tr=document.createElement('tr');
   tr.className='hover:bg-[#111d33]/50';
-  tr.innerHTML=`<td class="p-4 text-slate-500">${f.rank}</td>
-  <td class="p-4 text-white tracking-wide max-w- truncate">${f.name}</td>
-  <td class="p-4 text-slate-400">${f.category}</td>
-  <td class="p-4 text-white">${Number(f.score).toFixed(1)}</td>
-  <td class="p-4">${starsHtml(f)} <span class="text- text-slate-600">(${getStars(f)})</span></td>
-  <td class="p-4 ${Number(f.return_1y)>=0?'text-emerald-300/70':'text-red-300/70'}">${f.return_1y!=null?Number(f.return_1y).toFixed(2)+'%':'—'}</td>
-  <td class="p-4"><span class="px-3 py-1 rounded-full text- ${st.cls}">${getStars(f)>=4?'● ':getStars(f)==3?'● ':'● '}${st.text}</span></td>`;
+  tr.innerHTML=`
+  <td class="p-3 text-slate-500">${f.rank||''}</td>
+  <td class="p-3 text-slate-300 font-mono">${f.id||''}</td>
+  <td class="p-3 text-white max-w- truncate" title="${f.name}">${f.name||''}</td>
+  <td class="p-3 text-slate-400"><span class="px-2.5 py-1 rounded-full bg-slate-800/30 border border-slate-700/30 text-">${f.category||''}</span></td>
+  <td class="p-3 text-white">${Number(f.score||0).toFixed(1)}</td>
+  <td class="p-3">${starsHtml(stars)} <span class="text- text-slate-600 mr-1">${stars}★</span></td>
+  <td class="p-3 ${Number(f.return_1m)>=0?'text-emerald-300/80':'text-red-300/80'}">${fmt(f.return_1m)}</td>
+  <td class="p-3 font-medium ${Number(f.return_1y)>=0?'text-emerald-300/80':'text-red-300/80'}">${fmt(f.return_1y)}</td>
+  <td class="p-3 ${Number(f.return_3y)>=0?'text-emerald-300/80':'text-red-300/80'}">${fmt(f.return_3y)}</td>
+  <td class="p-3 text-slate-300">${fmtSharpe(f.sharpe_1y||f.sharpe)}</td>
+  <td class="p-3"><span class="px-3 py-1.5 rounded-full text- ${st.cls}">${st.label}</span></td>`;
   b.appendChild(tr);
  });
 }
 document.getElementById('searchInput').addEventListener('input',e=>{
  let q=e.target.value.toLowerCase();
- render(allFunds.filter(f=>f.name.toLowerCase().includes(q)));
+ render(allFunds.filter(f=>(f.name&&f.name.toLowerCase().includes(q)) || String(f.id).includes(q)));
 });
 document.getElementById('categoryFilter').addEventListener('change',e=>{
  let v=e.target.value;
