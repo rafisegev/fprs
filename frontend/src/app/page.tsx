@@ -9,7 +9,7 @@ function getNote(c:number){
  return {label:"מומנטום חיובי", color:"text-[#9B1B30]", bg:"bg-[#FBF1F2]", border:"border-[#E8C2C6]"};
 }
 export default function Page(){
- const funds = (fundsData as any) as Fund[];
+ const rawData = (fundsData as any); const funds = (Array.isArray(rawData) ? rawData : Array.isArray(rawData?.funds) ? rawData.funds : []) as Fund[];
  const [q,setQ]=useState(""); const [cat,setCat]=useState("all");
  const categories=useMemo(()=>Array.from(new Set(funds.map(f=>f.category))).sort(),[]);
  const filtered=useMemo(()=>{let list=funds as Fund[]; if(cat!=="all") list=list.filter(f=>f.category===cat); if(q.trim()){const n=q.trim().toLowerCase(); list=list.filter(f=> f.name.toLowerCase().includes(n) || String(f.id).toLowerCase().includes(n));} return [...list].sort((a,b)=>a.rank_in_category-b.rank_in_category).slice(0,400);},[q,cat]);
