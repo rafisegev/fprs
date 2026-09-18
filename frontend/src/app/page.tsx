@@ -1,8 +1,8 @@
 "use client";
 import { useState, useMemo } from "react";
 import fundsData from "../data/funds.json";
-type Fund = { id: string; name: string; category: string; return_1y: number; return_3y: number; fee: number; score: number; stars: string; rank_in_category: number; };
-function getStarCount(s: string){return (s.match(/⭐/g)||[]).length}
+type Fund = { id: string; name: string; category: string; return_1y: number; return_3y: number; fee: number; score: number; stars: any; rank_in_category: number; };
+function getStarCount(s: any){ if(typeof s === 'number') return s; if(typeof s === 'string') return (s.match(/⭐/g)||[]).length; return (s?.stars_count ?? 0) }
 function getNote(c:number){
  if(c<=2) return {label:"שחיקה בביצועים", color:"text-[#9B1B30]", bg:"bg-[#FBF1F2]", border:"border-[#E8C2C6]"};
  if(c===3) return {label:"יציב", color:"text-[#8A6D1B]", bg:"bg-[#FBF6E8]", border:"border-[#E6D9A8]"};
